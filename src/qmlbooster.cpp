@@ -34,10 +34,10 @@
 #endif
 
 #include "qmlbooster.h"
-#include "mdeclarativecache.h"
 #include "connection.h"
 #include "logger.h"
 #include "daemon.h"
+#include <MDeclarativeCache>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 const string QMLBooster::m_boosterType = "qtcomponents-qt5";
