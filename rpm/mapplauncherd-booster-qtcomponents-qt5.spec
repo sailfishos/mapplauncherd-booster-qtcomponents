@@ -31,13 +31,13 @@ make %{?jobs:-j%jobs}
 rm -rf %{buildroot}
 %qmake5_install
 
-mkdir %{buildroot}/usr/lib/systemd/user/mapplauncherd.target.wants || true
-ln -s ../booster-qtcomponents-qt5.service %{buildroot}/usr/lib/systemd/user/mapplauncherd.target.wants/
+mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/
+ln -s ../booster-qtcomponents-qt5.service %{buildroot}/usr/lib/systemd/user/user-session.target.wants/
 
 %files
 %defattr(-,root,root,-)
 %{_libexecdir}/mapplauncherd/booster-qtcomponents-qt5
 %{_datadir}/booster-qtcomponents-qt5/*
 %{_libdir}/systemd/user/booster-qtcomponents-qt5.service
-%{_libdir}/systemd/user/mapplauncherd.target.wants/booster-qtcomponents-qt5.service
+%{_libdir}/systemd/user/user-session.target.wants/booster-qtcomponents-qt5.service
 
