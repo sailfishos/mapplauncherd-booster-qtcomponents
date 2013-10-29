@@ -6,6 +6,7 @@ Requires=dbus.socket pre-user-session.target
 [Service]
 Type=notify
 ExecStart=/usr/libexec/mapplauncherd/booster-qtcomponents-qt5 --systemd
+OOMScoreAdjust=-250
 
 [Install]
 WantedBy=user-session.target
