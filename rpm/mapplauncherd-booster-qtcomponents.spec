@@ -3,7 +3,7 @@ Summary:    Application launch booster for Qt Components
 Version:    0.0.0
 Release:    1
 Group:      System/Applications
-License:    TBD
+License:    LGPLv2.1
 URL:        https://github.com/nemomobile/mapplauncherd-booster-qtcomponents
 Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  pkgconfig(QtCore) >= 4.8.0
