@@ -20,18 +20,8 @@
 #include <QFileInfo>
 #include <QtGlobal>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-# include <QQuickView>
-# include <QtQml>
-# define QDeclarativeView QQuickView
-# define QDeclarativeComponent QQmlComponent
-# define QDeclarativeContext QQmlContext
-# define QDeclarativeError QQmlError
-#else
-# include <QDeclarativeView>
-# include <QDeclarativeComponent>
-# include <QDeclarativeContext>
-#endif
+#include <QQuickView>
+#include <QtQml>
 
 #include "qmlbooster.h"
 #include "connection.h"
@@ -39,11 +29,7 @@
 #include "daemon.h"
 #include <MDeclarativeCache>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 const string QMLBooster::m_boosterType = "qtcomponents-qt5";
-#else
-const string QMLBooster::m_boosterType = "qtcomponents";
-#endif
 
 const string & QMLBooster::boosterType() const
 {
@@ -52,23 +38,23 @@ const string & QMLBooster::boosterType() const
 
 bool QMLBooster::preload()
 {
-    QDeclarativeView *view = MDeclarativeCache::populate();
+    QQuickView *view = MDeclarativeCache::populate();
 
     // Load a QML file that references common elements, which will compile and cache them all
     QString file = "/usr/share/booster-";
     file += boosterType().c_str();
     file += "/preload.qml";
 
-    QDeclarativeComponent component(view->engine(), QUrl::fromLocalFile(file));
+    QQmlComponent component(view->engine(), QUrl::fromLocalFile(file));
     if (!component.isReady()) {
         Logger::logError("QMLBooster: Preload component failed to load:");
-        foreach (const QDeclarativeError &e, component.errors())
+        foreach (const QQmlError &e, component.errors())
             Logger::logError("QMLBooster:    %s", e.toString().toLatin1().constData());
         return true;
     }
 
     // Create an instance of that object, which will initialize everything else
-    QDeclarativeContext context(view->engine());
+    QQmlContext context(view->engine());
     QObject *obj = component.create(&context);
     if (!obj)
         Logger::logError("QMLBooster: Preload object creation failed");
