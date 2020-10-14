@@ -2,7 +2,7 @@ Name:       mapplauncherd-booster-qtcomponents-qt5
 Summary:    Application launch booster for Qt5 Qt Components
 Version:    0.0.0
 Release:    1
-License:    LGPLv2.1
+License:    LGPLv2
 URL:        https://github.com/nemomobile/mapplauncherd-booster-qtcomponents
 Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  pkgconfig(Qt5Core)
@@ -40,4 +40,5 @@ ln -s ../booster-qtcomponents-qt5.service %{buildroot}%{_userunitdir}/user-sessi
 %{_datadir}/booster-qtcomponents-qt5/*
 %{_userunitdir}/booster-qtcomponents-qt5.service
 %{_userunitdir}/user-session.target.wants/booster-qtcomponents-qt5.service
+%license LICENSE.LGPL
 
